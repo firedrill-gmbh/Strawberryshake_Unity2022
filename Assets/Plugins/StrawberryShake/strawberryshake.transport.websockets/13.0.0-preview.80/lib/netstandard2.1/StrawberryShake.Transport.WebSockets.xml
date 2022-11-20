@@ -1,0 +1,1398 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StrawberryShake.Transport.WebSockets</name>
+    </assembly>
+    <members>
+        <member name="T:StrawberryShake.Transport.WebSockets.DefaultSocketClientFactory">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.DefaultSocketClientFactory.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{StrawberryShake.Transport.WebSockets.SocketClientFactoryOptions},System.Collections.Generic.IEnumerable{StrawberryShake.Transport.WebSockets.ISocketProtocolFactory})">
+            <summary>
+            Initializes a new instance of <see cref="T:StrawberryShake.Transport.WebSockets.DefaultSocketClientFactory"/>
+            </summary>
+            <param name="optionsMonitor">The options monitor for the factory options</param>
+            <param name="protocolFactories">The possible protocol factories</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.DefaultSocketClientFactory.CreateClient(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.DefaultWebSocketClientBuilder">
+            <summary>
+            Builder for a <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.DefaultWebSocketClientBuilder.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:StrawberryShake.Transport.WebSockets.DefaultSocketClientFactory"/>
+            </summary>
+            <param name="services">The service collection of the application</param>
+            <param name="name">The name of the websocket</param>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.DefaultWebSocketClientBuilder.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.DefaultWebSocketClientBuilder.Services">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder">
+            <summary>
+            A builder for configuring named <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/>
+            instances returned by <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClientFactory"/>.
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder.Name">
+            <summary>
+            Gets the name of the client configured by this builder.
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder.Services">
+            <summary>
+            Gets the application service collection.
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.SocketClientFactoryOptions">
+            <summary>
+            Options of a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/>
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.SocketClientFactoryOptions.SocketClientActions">
+            <summary>
+            Gets a list of operations used to configure an <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/>.
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.ISession">
+            <summary>
+            Represents a manager for socket operations. This manager can be used to start and stop
+            operations on a socket.
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.ISession.Name">
+            <summary>
+            The name of the underlying socket client
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISession.OpenSessionAsync(System.Threading.CancellationToken)">
+            <summary>
+            Opens a session over the socket
+            </summary>
+            <param name="cancellationToken">The cancellation token to cancel the operation</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISession.StartOperationAsync(StrawberryShake.OperationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Starts a new operation over the socket
+            </summary>
+            <param name="request">The request that opens the operations</param>
+            <param name="cancellationToken">The cancellation token to cancel the operation</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISession.StopOperationAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Starts a new operation over the socket
+            </summary>
+            <param name="operationId">The id of the operation to stop</param>
+            <param name="cancellationToken">The cancellation token to cancel the operation</param>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.ISocketClient">
+            <summary>
+            Represents a client for sending and receiving messages responses over a abstract socket
+            identified by a URI and name.
+            </summary>
+        </member>
+        <member name="E:StrawberryShake.Transport.WebSockets.ISocketClient.ReceiveFinished">
+            <summary>
+            An event that is called when the message receiving cycle stoped
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.ISocketClient.Uri">
+            <summary>
+            The URI where the socket should connect to
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.ISocketClient.ConnectionInterceptor">
+            <summary>
+            The <see cref="T:StrawberryShake.Transport.WebSockets.ISocketConnectionInterceptor"/> of this client
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.ISocketClient.Name">
+            <summary>
+            The name of the socket
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.ISocketClient.IsClosed">
+            <summary>
+            If the socket is open or closed
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketClient.SendAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)">
+            <summary>
+            Sends data asynchronously to a connected Socket object.
+            </summary>
+            <param name="message">The message to send</param>
+            <param name="cancellationToken">The cancellation token to cancel the operation</param>
+            <returns>A task that is completed once the message is send</returns>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketClient.ReceiveAsync(System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)">
+            <summary>
+            Begins an asynchronous request to receive data from a connected Socket object and writes
+            it into the provider <see cref="T:System.IO.Pipelines.PipeWriter"/>
+            </summary>
+            <param name="writer">The writer where the received data is written to</param>
+            <param name="cancellationToken">The cancellation token to cancel the operation</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketClient.OpenAsync(System.Threading.CancellationToken)">
+            <summary>
+            Opens a connection to the server
+            </summary>
+            <param name="cancellationToken">The cancellation token to cancel the operation</param>
+            <returns>The socket protocol that was established with the server</returns>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketClient.CloseAsync(System.String,StrawberryShake.Transport.WebSockets.SocketCloseStatus,System.Threading.CancellationToken)">
+            <summary>
+            Closes a connection to the server
+            </summary>
+            <param name="message">A message why the connection was closes</param>
+            <param name="closeStatus">The close status on how the socket was closes</param>
+            <param name="cancellationToken">The cancellation token to cancel the operation</param>
+            <returns></returns>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.ISocketClientFactory">
+            <summary>
+            A factory abstraction for a component that can create <see cref="T:System.Net.WebSockets.ClientWebSocket"/>
+            instances with custom configuration for a given logical name.
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketClientFactory.CreateClient(System.String)">
+            <summary>
+            Creates and configures an <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/> instance using the
+            configuration that corresponds to the logical name specified by <paramref name="name"/>.
+            </summary>
+            <param name="name">The logical name of the client to create.</param>
+            <returns>A new <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/> instance.</returns>
+            <remarks>
+            <para>
+            Each call to <see cref="M:StrawberryShake.Transport.WebSockets.ISocketClientFactory.CreateClient(System.String)"/> is guaranteed to return
+            a new <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/>
+            instance. Callers may cache the returned <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/>
+            instance indefinitely or surround  its use in a <langword>using</langword>
+            block to dispose it when desired.
+            </para>
+            <para>
+            Callers are also free to mutate the returned <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/>
+            instance's public properties as desired.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.ISocketConnectionInterceptor">
+            <summary>
+            Intercepts connections of a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketProtocol"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketConnectionInterceptor.CreateConnectionInitPayload(StrawberryShake.Transport.WebSockets.ISocketProtocol,System.Threading.CancellationToken)">
+            <summary>
+            This method is called before the first message is sent to the server. The object
+            returned from this message, will be passed to the server as the initial payload.
+            </summary>
+            <param name="protocol">
+            The protocol over which the connection will be established
+            </param>
+            <param name="cancellationToken">
+            The cancellation token of this connection
+            </param>
+            <returns>
+            Returns the initial payload of the connection
+            </returns>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.ISessionPool">
+            <summary>
+            Represents a pool of <see cref="T:StrawberryShake.Transport.WebSockets.ISession"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISessionPool.CreateAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Rents a named <see cref="T:StrawberryShake.Transport.WebSockets.ISession"/> from the pool.
+            </summary>
+            <param name="name">The name of the client</param>
+            <param name="cancellationToken">The cancellation token for the operation</param>
+            <returns>A socket session</returns>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.ISocketOperation">
+            <summary>
+            Represents a operation on a socket
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.ISocketOperation.Id">
+            <summary>
+            The id of the operation
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketOperation.ReadAsync">
+            <summary>
+            CReate an operation message stream.
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketOperation.CompleteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Complete the operation
+            </summary>
+            <param name="cancellationToken">
+            A <see cref="T:System.Threading.CancellationToken"/> to cancel the completion
+            </param>
+            <returns>A task that is completed once the operation is completed</returns>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.OnReceiveAsync">
+            <summary>
+            Delegate that is invoked whenever a message is received by the protocol
+            </summary>
+            <param name="operationId">The ide of the operation that the message belongs to</param>
+            <param name="message">The message</param>
+            <param name="cancellationToken">A token to cancel processing the message</param>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.ISocketProtocol">
+            <summary>
+            A protocol that can be used to communicate to a GraphQL server over
+            <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/>
+            </summary>
+        </member>
+        <member name="E:StrawberryShake.Transport.WebSockets.ISocketProtocol.Disposed">
+            <summary>
+             A even that is called when the <see cref="T:StrawberryShake.Transport.WebSockets.ISocketProtocol"/> is disposed
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketProtocol.StartOperationAsync(System.String,StrawberryShake.OperationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Starts a new operation on the server
+            </summary>
+            <param name="operationId">
+            The id of the operation. This id must be unique!
+            </param>
+            <param name="request">
+            The <see cref="T:StrawberryShake.OperationRequest"/> that contains the definition of the operation
+            </param>
+            <param name="cancellationToken">
+            A <see cref="T:System.Threading.CancellationToken"/> to cancel the start of the operation
+            </param>
+            <returns>A task that is completed once the operation is started</returns>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketProtocol.StopOperationAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Stops a operation on the server
+            </summary>
+            <param name="operationId">The id of the operation to stop</param>
+            <param name="cancellationToken">
+            A <see cref="T:System.Threading.CancellationToken"/> to cancel the stop of the operation
+            </param>
+            <returns>A task that is completed once the operation is stopped</returns>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketProtocol.InitializeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Initializes the protocol over a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/> on the server.
+            </summary>
+            <param name="cancellationToken">
+            A <see cref="T:System.Threading.CancellationToken"/> to cancel the initialization
+            </param>
+            <returns>A task that is completed once the protocol is established</returns>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketProtocol.TerminateAsync(System.Threading.CancellationToken)">
+            <summary>
+            Terminates the protocol and the communication with the server
+            </summary>
+            <param name="cancellationToken">
+            A <see cref="T:System.Threading.CancellationToken"/> to cancel the termination
+            </param>
+            <returns>A task that is completed once the protocol is terminated</returns>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketProtocol.Subscribe(StrawberryShake.Transport.WebSockets.OnReceiveAsync)">
+            <summary>
+            Subscribes a listener to receive all messages that the server sends over this protocol
+            </summary>
+            <param name="listener">
+            The listener that is invoked on every message
+            </param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketProtocol.Unsubscribe(StrawberryShake.Transport.WebSockets.OnReceiveAsync)">
+            <summary>
+            Unsubscribes a listener from the protocol..
+            </summary>
+            <param name="listener"></param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketProtocol.NotifyCompletion(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Notify the protocol to complete
+            </summary>
+            <param name="operationId">The id of the operation to stop</param>
+            <param name="cancellationToken">
+            A <see cref="T:System.Threading.CancellationToken"/> to cancel the notification
+            </param>
+            <returns>A task that is completed once the notification is completed</returns>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.ISocketProtocolFactory">
+            <summary>
+            Represents a factory for <see cref="T:StrawberryShake.Transport.WebSockets.ISocketProtocol"/>
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.ISocketProtocolFactory.ProtocolName">
+            <summary>
+            The name of the protocol this factory can create
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.ISocketProtocolFactory.Create(StrawberryShake.Transport.WebSockets.ISocketClient)">
+            <summary>
+            Creates a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketProtocol"/>
+            </summary>
+            <param name="socketClient">The client where the socket protocol uses</param>
+            <returns>A socket protocol</returns>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.IWebSocketClient">
+            <summary>
+            Represents a client for sending and receiving messages responses over a websocket
+            identified by a URI and name.
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.IWebSocketClient.Socket">
+            <summary>
+            The <see cref="T:System.Net.WebSockets.WebSocket"/> that is used to communicate with the server
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.IWebSocketConnection">
+            <summary>
+            A WebSocket connection to a GraphQL server and allows to execute requests against it.
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.IRequestWriter">
+            <summary>
+            Represents a output sink into which bytes can be written.
+            Exposes the written buffer with the Body property
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.IRequestWriter.Body">
+            <summary>
+            The body of the buffered data
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.IRequestWriter.Reset">
+            <summary>
+            Resets the buffer so it can be reused
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.MessagePipeline">
+            <summary>
+            Subscribes to a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/> to receive data and pipes it through a
+            <see cref="T:StrawberryShake.Transport.WebSockets.MessageProcessor"/> that executes the even handler passed into the
+            <see cref="T:StrawberryShake.Transport.WebSockets.MessagePipeline"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.MessagePipeline.Start">
+            <summary>
+            Start receiving message from the socket
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.MessagePipeline.Stop">
+            <summary>
+            Stop receiving message from the socket
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.MessagePipeline.DisposeAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.MessagePipeline.State">
+            <summary>
+            The state of the receiver
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.ProcessAsync">
+            <summary>
+            Event handler to receive message data
+            </summary>
+            <param name="messageData">The sequence of bytes of this message</param>
+            <param name="cancellationToken">The cancellation token of the action</param>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.MessageProcessor">
+            <summary>
+            Subscribes to <see cref="T:System.IO.Pipelines.PipeReader"/> and executes <see cref="T:StrawberryShake.Transport.WebSockets.ProcessAsync"/> whenever
+            a message was fully received
+            </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.MessageProcessor.Delimiter">
+            <summary>
+            The Delimiter that separated two messages
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.MessageProcessor.Start(System.IO.Pipelines.PipeReader,StrawberryShake.Transport.WebSockets.ProcessAsync,System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to <see cref="T:System.IO.Pipelines.PipeReader"/> and executes <see cref="T:StrawberryShake.Transport.WebSockets.ProcessAsync"/> whenever
+            a message was fully received
+            </summary>
+            <param name="reader">The reader that provides the data</param>
+            <param name="process">
+            The event handler that is invoked every time a message is fully parsed
+            </param>
+            <param name="cancellationToken">
+            The cancellation token that cancels
+            </param>
+            <returns>
+            A task that is completed when <paramref name="cancellationToken"/> is cancelled
+            </returns>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.MessageReceiver">
+            <summary>
+            Subscribes to a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/> to receive data and pipes the received messages
+            separated by a delimiter into a pipe.
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.MessageReceiver.Start(System.IO.Pipelines.PipeWriter,StrawberryShake.Transport.WebSockets.ISocketClient,System.Threading.CancellationToken)">
+            <summary>
+            Subscribes to a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/> to receive data and pipes the received
+            messages separated by a delimiter into a pipe.
+            </summary>
+            <param name="writer">The writer the message to write to</param>
+            <param name="client">The client to subscribe to</param>
+            <param name="cancellationToken">The cancellation token that stops the receiving</param>
+            <returns>
+            A tasks that stops when <paramref name="cancellationToken"/> is cancelled
+            </returns>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Messages.CancelledOperationMessage">
+            <summary>
+            The <see cref="T:StrawberryShake.Transport.WebSockets.Messages.CancelledOperationMessage"/> is used to signal a socket operation that it
+            is complete
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Messages.CompleteOperationMessage">
+            <summary>
+            The <see cref="T:StrawberryShake.Transport.WebSockets.Messages.CompleteOperationMessage"/> is used to signal a socket operation that it
+            is complete
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Messages.DataDocumentOperationMessage`1">
+            <summary>
+            The <see cref="T:StrawberryShake.Transport.WebSockets.Messages.DataDocumentOperationMessage`1"/> is used to transport a data payload to the
+            socket operation
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Messages.DataDocumentOperationMessage`1.#ctor(`0)">
+            <summary>
+            Creates a new instance of a <see cref="T:StrawberryShake.Transport.WebSockets.Messages.OperationMessage"/>
+            </summary>
+            <param name="payload">
+            The payload of the message
+            </param>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Messages.ErrorOperationMessage">
+            <summary>
+            The <see cref="T:StrawberryShake.Transport.WebSockets.Messages.ErrorOperationMessage"/> is used to transport any connection error to the
+            socket operation
+            </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Messages.ErrorOperationMessage.ConnectionInitializationError">
+            <summary>
+            Default connection error
+            <remarks>
+            Connection initialization failed. Could not connect to server
+            </remarks>
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Messages.OperationMessage">
+            <summary>
+            The <see cref="T:StrawberryShake.Transport.WebSockets.Messages.OperationMessage"/> is used as a data transport structure to send messages
+            over a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketProtocol"/> to the <see cref="T:StrawberryShake.Transport.WebSockets.SocketOperation"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Messages.OperationMessage.#ctor(StrawberryShake.Transport.WebSockets.Messages.OperationMessageType)">
+            <summary>
+            Creates a new instance of a <see cref="T:StrawberryShake.Transport.WebSockets.Messages.OperationMessage"/>
+            </summary>
+            <param name="type">The type of the message</param>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.Messages.OperationMessage.Type">
+            <summary>
+            The identifier of the type of the message.
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Messages.OperationMessageType">
+            <summary>
+            The kinds of a operation message
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Messages.OperationMessage`1">
+            <summary>
+            The <see cref="T:StrawberryShake.Transport.WebSockets.Messages.OperationMessage"/> is used as a data transport structure to send messages
+            over a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketProtocol"/> to the <see cref="T:StrawberryShake.Transport.WebSockets.SocketOperation"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Messages.OperationMessage`1.#ctor(StrawberryShake.Transport.WebSockets.Messages.OperationMessageType,`0)">
+            <summary>
+            Creates a new instance of a <see cref="T:StrawberryShake.Transport.WebSockets.Messages.OperationMessage"/>
+            </summary>
+            <param name="type">The type of the message</param>
+            <param name="payload">
+            The payload of the message
+            </param>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.Messages.OperationMessage`1.Payload">
+            <summary>
+            The payload of the message
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.RequestWriter">
+            <inheritdoc />
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.RequestWriter.Body">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.RequestWriter.Advance(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.RequestWriter.GetMemory(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.RequestWriter.GetSpan(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.RequestWriter.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.RequestWriter.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.RequestWriter.Dispose(System.Boolean)">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting
+            unmanaged resources
+            </summary>
+            <param name="disposing">True if it is disposing</param>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.SocketMessageWriter">
+            <summary>
+            A Json message writer that buffers the result locally
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.SocketMessageWriter.Writer">
+            <summary>
+            The underlying json writer
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketMessageWriter.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:StrawberryShake.Transport.WebSockets.SocketMessageWriter"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketMessageWriter.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketMessageWriter.WriteStartObject">
+            <summary>
+            Writes the beginning of a JSON object
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketMessageWriter.WriteEndObject">
+            <summary>
+            Writes the end of a JSON object
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketMessageWriter.DisposeAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketMessageWriter.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.SynchronizedMessageWriter">
+            <summary>
+            Synchronizes the writes to a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/> over a
+            <see cref="T:StrawberryShake.Transport.WebSockets.SocketMessageWriter"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SynchronizedMessageWriter.#ctor(StrawberryShake.Transport.WebSockets.ISocketClient)">
+            <summary>
+            Creates a new instance of <see cref="T:StrawberryShake.Transport.WebSockets.SynchronizedMessageWriter"/>
+            </summary>
+            <param name="socketClient">
+            The socket where the messages should be send to
+            </param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SynchronizedMessageWriter.CommitAsync(System.Action{StrawberryShake.Transport.WebSockets.SocketMessageWriter},System.Threading.CancellationToken)">
+            <summary>
+            Sends the changes made in <paramref name="action"/> to the <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/>
+            </summary>
+            <param name="action">Configure the message to send</param>
+            <param name="cancellationToken">The cancellation token to cancel the operations</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SynchronizedMessageWriter.DisposeAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessage">
+            <summary>
+            The <see cref="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessage"/> is used as a data transport structure to send messages
+            over a <see cref="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol"/>
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessage.Id">
+            <summary>
+            The Id of the operation this message belongs to.
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessage.Type">
+            <summary>
+            The identifier of the type of the message.
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessage.Payload">
+            <summary>
+            The payload of the message
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageParser">
+            <summary>
+            The <see cref="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageParser"/> parses a sequence of bytes into a
+            <see cref="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessage"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageParser.#ctor(System.Buffers.ReadOnlySequence{System.Byte})">
+            <summary>
+            Initializes a new instance of <see cref="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageParser"/>
+            </summary>
+            <param name="messageData">
+            The sequence of bytes containing the data of the message
+            </param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageParser.ParseMessage">
+            <summary>
+            Parses the message out of the sequence
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">
+            Thrown when a invalid token, a unknown field or the type is not specified
+            </exception>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageParser.Parse(System.Buffers.ReadOnlySequence{System.Byte})">
+            <summary>
+            Parses a <see cref="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessage"/> from a sequence of bytes
+            </summary>
+            <param name="messageData">
+            The sequence of bytes containing the data of the message
+            </param>
+            <exception cref="T:System.Runtime.Serialization.SerializationException">
+            Thrown when a invalid token, a unknown field or the type is not specified
+            </exception>
+            <returns>The parsed message</returns>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType">
+            <summary>
+            The message types of the graphql-ws protocol
+            </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.None">
+            <summary>
+            Default message type.
+            </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.ConnectionInit">
+             <summary>
+             Client sends this message after plain websocket connection to start the
+             communication with the server
+            
+             The server will response only with
+             <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.ConnectionAccept"/> + <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.KeepAlive"/> (if used) or
+             <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Error"/> to this message.
+            
+             <example>
+             <code>
+             {
+                "type": "connection_init"
+             }
+             </code>
+             </example>
+             </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.ConnectionAccept">
+            <summary>
+            The server may responses with this message to the <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.ConnectionInit"/> from
+            client indicates the server accepted the connection. May optionally include a payload.
+            </summary>
+            <example>
+            <code>
+            {
+               "type": "connection_ack"
+            }
+            </code>
+            </example>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.ConnectionError">
+            <summary>
+            The server may responses with this message to the <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.ConnectionInit"/> from
+            client, indicates the server rejected the connection.
+            It server also respond with this message in case of a parsing errors of the message
+            (which does not disconnect the client, just ignore the message).
+            <example>
+            <code>
+            {
+               "type": "connection_error"
+               "payload": {
+                    "message": "Something went wrong"
+               }
+            }
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.KeepAlive">
+             <summary>
+             Server message that should be sent right after each `<see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.ConnectionAccept"/>`
+             processed and then periodically to keep the client connection alive.
+            
+             The client starts to consider the keep alive message only upon the first received
+             keep alive message from the server.
+             <example>
+             <code>
+             {
+                "type": "ka"
+             }
+             </code>
+             </example>
+             </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.ConnectionTerminate">
+            <summary>
+            Client sends this message to terminate the connection.
+            <example>
+            <code>
+            {
+               "type": "connection_terminate"
+            }
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Start">
+            <summary>
+            Client sends this message to execute GraphQL operation
+            <example>
+            <code>
+            {
+               "id": "a2f1d594-cf4b-4e2c-85f6-5238ad6a9f68",
+               "type": "start",
+               "payload": {
+                    "query": "subscription Foo{ onFoo }",
+                    "variables": null,
+                    "operationName": "Foo"
+               }
+            }
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Data">
+             <summary>
+             The server sends this message to transfer the GraphQL execution result from the
+             server to the client, this message is a response for <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Start"/> message.
+            
+             For each GraphQL operation send with `<see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Start"/>`, the server will respond
+             with at least one `<see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Data"/>` message.
+             <example>
+             <code>
+             {
+                "id": "a2f1d594-cf4b-4e2c-85f6-5238ad6a9f68",
+                "type": "data",
+                "payload": {
+                     "data": { "foo": "bar" },
+                     "errors": [{"message": "Something"}],
+                }
+             }
+             </code>
+             </example>
+             </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Error">
+            <summary>
+            Server sends this message upon a failing operation, before the GraphQL execution,
+            usually due to GraphQL validation errors (resolver errors are part of
+            <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Data"/> message, and will be added as errors array)
+            <example>
+            <code>
+            {
+               "id": "a2f1d594-cf4b-4e2c-85f6-5238ad6a9f68",
+               "type": "error",
+               "payload": {
+                    "message": "Something",,
+               }
+            }
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Complete">
+            <summary>
+            Server sends this message to indicate that a GraphQL operation is done, and no more
+            data will arrive for the specific operation.
+            <example>
+            <code>
+            {
+               "id": "a2f1d594-cf4b-4e2c-85f6-5238ad6a9f68",
+               "type": "complete"
+            }
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Stop">
+            <summary>
+            Client sends this message in order to stop a running GraphQL operation execution
+            (for example: unsubscribe)
+            <example>
+            <code>
+            {
+               "id": "a2f1d594-cf4b-4e2c-85f6-5238ad6a9f68",
+               "type": "stop"
+            }
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol">
+            <summary>
+            A implementation of <see cref="T:StrawberryShake.Transport.WebSockets.ISocketProtocol"/> that uses graphql-ws protocol to
+            communicate with the server
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol.#ctor(StrawberryShake.Transport.WebSockets.ISocketClient)">
+            <summary>
+            Initializes a new instance of <see cref="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol"/>
+            </summary>
+            <param name="socketClient">
+            The client where this protocol is using
+            </param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol.StartOperationAsync(System.String,StrawberryShake.OperationRequest,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol.StopOperationAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol.InitializeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol.TerminateAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol.DisposeAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocolFactory">
+            <summary>
+            Factory for <see cref="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol"/>
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocolFactory.ProtocolName">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocolFactory.Create(StrawberryShake.Transport.WebSockets.ISocketClient)">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketWriterExtension">
+            <summary>
+            Common extension of the <see cref="T:StrawberryShake.Transport.WebSockets.SocketMessageWriter"/> for
+            <see cref="T:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketProtocol"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketWriterExtension.WriteStartOperationMessage(StrawberryShake.Transport.WebSockets.SocketMessageWriter,System.String,StrawberryShake.OperationRequest)">
+            <summary>
+            Writes a <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Start"/> message to the writer
+            </summary>
+            <param name="writer">The writer</param>
+            <param name="operationId">The operation id of the operation</param>
+            <param name="request">The operation request containing the payload</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketWriterExtension.WriteStopOperationMessage(StrawberryShake.Transport.WebSockets.SocketMessageWriter,System.String)">
+            <summary>
+            Writes a <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.Stop"/> message to the writer
+            </summary>
+            <param name="writer">The writer</param>
+            <param name="operationId">The operation id of the operation</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketWriterExtension.WriteInitializeMessage(StrawberryShake.Transport.WebSockets.SocketMessageWriter,System.Object)">
+            <summary>
+            Writes a <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.ConnectionInit"/>message to the writer
+            </summary>
+            <param name="writer">The writer</param>
+            <param name="payload">The payload of the init message</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketWriterExtension.WriteTerminateMessage(StrawberryShake.Transport.WebSockets.SocketMessageWriter)">
+            <summary>
+            Writes a <see cref="F:StrawberryShake.Transport.WebSockets.Protocols.GraphQLWebSocketMessageType.ConnectionTerminate"/> message to the
+            writer
+            </summary>
+            <param name="writer">The writer</param>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.Session">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Session.#ctor(StrawberryShake.Transport.WebSockets.ISocketClient)">
+            <summary>
+            Creates a new instance <see cref="T:StrawberryShake.Transport.WebSockets.Session"/>
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.Session.Name">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Session.StartOperationAsync(StrawberryShake.OperationRequest,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Session.StopOperationAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Session.CompleteOperation(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Session.ReceiveFinishHandler(System.Object,System.EventArgs)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Session.OpenSessionAsync(System.Threading.CancellationToken)">
+            <summary>
+            Opens a session over the socket
+            </summary>
+            <param name="cancellationToken">The cancellation token to cancel the operation</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Session.CloseSessionAsync(System.Threading.CancellationToken)">
+            <summary>
+            Closes a session over the socket
+            </summary>
+            <param name="cancellationToken">The cancellation token to cancel the operation</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Session.ReceiveMessage(System.String,StrawberryShake.Transport.WebSockets.Messages.OperationMessage,System.Threading.CancellationToken)">
+            <summary>
+            Receive a message from the socket
+            </summary>
+            <param name="operationId">Id of the operation</param>
+            <param name="message">The payload of the message</param>
+            <param name="cancellationToken">
+            The cancellation token to cancel
+            </param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.Session.DisposeAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.SessionPool">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SessionPool.CreateAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SessionPool.ReturnAsync(StrawberryShake.Transport.WebSockets.ISession,System.Threading.CancellationToken)">
+            <summary>
+            Returns a socket session to the pool.
+            </summary>
+            <param name="session">The session</param>
+            <param name="cancellationToken">The cancellation token for the operation</param>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.SocketCloseStatus">
+            <summary>
+            Represents the different status that a socket can be closed by
+            </summary>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.SocketOperation">
+            <summary>
+            Represents a operation on a socket
+            </summary>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.SocketOperation.Id">
+            <summary>
+            The id of the operation
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketOperation.#ctor(StrawberryShake.Transport.WebSockets.ISession)">
+            <summary>
+            Initializes a new <see cref="T:StrawberryShake.Transport.WebSockets.SocketOperation"/>
+            </summary>
+            <param name="manager">
+            The socket operation manager that this operation manages
+            </param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketOperation.#ctor(StrawberryShake.Transport.WebSockets.ISession,System.String)">
+            <summary>
+            Initializes a new <see cref="T:StrawberryShake.Transport.WebSockets.SocketOperation"/>
+            </summary>
+            <param name="manager">
+            The socket operation manager that this operation manages
+            </param>
+            <param name="id">
+            The id of this operation
+            </param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketOperation.ReadAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketOperation.CompleteAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketOperation.DisposeAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.SocketOperationException">
+            <summary>
+            Unexpected exception during a socket operation
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketOperationException.#ctor">
+            <summary>
+            Creates a new <see cref="T:StrawberryShake.Transport.WebSockets.SocketOperationException"/>
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketOperationException.#ctor(System.String)">
+            <summary>
+            Creates a new <see cref="T:StrawberryShake.Transport.WebSockets.SocketOperationException"/>
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketOperationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new <see cref="T:StrawberryShake.Transport.WebSockets.SocketOperationException"/>
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">THe inner exception.</param>
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.SocketProtocolBase">
+            <summary>
+            A protocol that can be used to communicate to a GraphQL server over
+            <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClient"/>
+            </summary>
+        </member>
+        <member name="E:StrawberryShake.Transport.WebSockets.SocketProtocolBase.Disposed">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketProtocolBase.StartOperationAsync(System.String,StrawberryShake.OperationRequest,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketProtocolBase.StopOperationAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketProtocolBase.InitializeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketProtocolBase.TerminateAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketProtocolBase.Subscribe(StrawberryShake.Transport.WebSockets.OnReceiveAsync)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketProtocolBase.Unsubscribe(StrawberryShake.Transport.WebSockets.OnReceiveAsync)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketProtocolBase.Notify(System.String,StrawberryShake.Transport.WebSockets.Messages.OperationMessage,System.Threading.CancellationToken)">
+            <summary>
+            Notify all listeners that a message is received
+            </summary>
+            <param name="operationId">The ide of the operation that the message belongs to</param>
+            <param name="message">The operation message</param>
+            <param name="cancellationToken">A token to cancel processing the message</param>
+            <returns>A value task that is completed once all subscribers are notified</returns>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketProtocolBase.NotifyCompletion(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.SocketProtocolBase.DisposeAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.WebSocketClient">
+            <summary>
+            Represents a client for sending and receiving messages responses over a websocket
+            identified by a URI and name.
+            </summary>
+        </member>
+        <member name="E:StrawberryShake.Transport.WebSockets.WebSocketClient.ReceiveFinished">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.WebSocketClient.#ctor(System.String,System.Collections.Generic.IReadOnlyList{StrawberryShake.Transport.WebSockets.ISocketProtocolFactory})">
+            <summary>
+            Creates a new instance of <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>
+            </summary>
+            <param name="name">The name of the socket</param>
+            <param name="protocolFactories">The protocol factories this socket supports</param>
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.WebSocketClient.Uri">
+            <inheritdoc />
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.WebSocketClient.ConnectionInterceptor">
+            <inheritdoc />
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.WebSocketClient.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.WebSocketClient.IsClosed">
+            <inheritdoc />
+        </member>
+        <member name="P:StrawberryShake.Transport.WebSockets.WebSocketClient.Socket">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.WebSocketClient.OpenAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.WebSocketClient.CloseAsync(System.String,StrawberryShake.Transport.WebSockets.SocketCloseStatus,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.WebSocketClient.SendAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.WebSocketClient.ReceiveAsync(System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.WebSocketClient.DisposeAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:StrawberryShake.Transport.WebSockets.WebSocketConnection">
+            <summary>
+            A WebSocket connection to a GraphQL server and allows to execute requests against it.
+            </summary>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.WebSocketConnection.#ctor(System.Func{System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{StrawberryShake.Transport.WebSockets.ISession}})">
+            <summary>
+            Creates a new instance of a <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketConnection"/>
+            </summary>
+            <param name="sessionFactory"></param>
+        </member>
+        <member name="M:StrawberryShake.Transport.WebSockets.WebSocketConnection.ExecuteAsync(StrawberryShake.OperationRequest)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.WebSocketClientBuilderExtensions">
+            <summary>
+            Extension methods for configuring an <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientBuilderExtensions.ConfigureWebSocketClient``1(StrawberryShake.IClientBuilder{``0},System.Action{StrawberryShake.Transport.WebSockets.IWebSocketClient},System.Action{StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder})">
+            <summary>
+            Adds the <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClientFactory"/> and related services to the
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> and configures a <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>
+            with the correct name
+            </summary>
+            <param name="clientBuilder">
+            The <see cref="T:StrawberryShake.IClientBuilder`1"/>
+            </param>
+            <param name="configureClient">
+            A delegate that is used to configure an <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </param>
+            <param name="configureClientBuilder">
+            A delegate that is used to additionally configure the <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClient"/>
+            with a <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/>
+            </param>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientBuilderExtensions.ConfigureWebSocketClient``1(StrawberryShake.IClientBuilder{``0},System.Action{System.IServiceProvider,StrawberryShake.Transport.WebSockets.IWebSocketClient},System.Action{StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder})">
+            <summary>
+            Adds the <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClientFactory"/> and related services to the
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> and configures a <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>
+            with the correct name
+            </summary>
+            <param name="clientBuilder">
+            The <see cref="T:StrawberryShake.IClientBuilder`1"/>
+            </param>
+            <param name="configureClient">
+            A delegate that is used to configure an <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </param>
+            <param name="configureClientBuilder">
+            A delegate that is used to additionally configure the <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClient"/>
+            with a <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/>
+            </param>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientBuilderExtensions.ConfigureWebSocketClient(StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder,System.Action{StrawberryShake.Transport.WebSockets.IWebSocketClient})">
+            <summary>
+            Adds a delegate that will be used to configure a named <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </summary>
+            <param name="builder">
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </param>
+            <param name="configureClient">
+            A delegate that is used to configure an <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </param>
+            <returns>
+            An <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/> that can be used to configure the client.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientBuilderExtensions.ConfigureWebSocketClient(StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder,System.Action{System.IServiceProvider,StrawberryShake.Transport.WebSockets.IWebSocketClient})">
+            <summary>
+            Adds a delegate that will be used to configure a named <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </summary>
+            <param name="builder">
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </param>
+            <param name="configureClient">
+            A delegate that is used to configure an <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </param>
+            <returns>
+            An <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/> that can be used to configure the client.
+            </returns>
+            <remarks>
+            The <see cref="T:System.IServiceProvider"/> provided to <paramref name="configureClient"/>
+            will be the application's root service provider instance.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientBuilderExtensions.ConfigureConnectionInterceptor(StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder,StrawberryShake.Transport.WebSockets.ISocketConnectionInterceptor)">
+            <summary>
+            Configures a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketConnectionInterceptor"/> on this socket client
+            </summary>
+            <param name="builder">
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </param>
+            <param name="interceptor">
+            The interceptor that should be used
+            </param>
+            <returns>
+            An <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/> that can be used to configure the client.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientBuilderExtensions.ConfigureConnectionInterceptor``1(StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder)">
+             <summary>
+             Configures what type of <see cref="T:StrawberryShake.Transport.WebSockets.ISocketConnectionInterceptor"/> this socket client
+             should use.
+            
+             Resolves the <typeparamref name="TInterceptor"/> from the dependency injection
+             </summary>
+             <param name="builder">
+             The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+             </param>
+             <typeparam name="TInterceptor">
+             The type of the <see cref="T:StrawberryShake.Transport.WebSockets.ISocketConnectionInterceptor"/> that should be resolved from
+             the dependency injection
+             </typeparam>
+             <returns>
+             An <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/> that can be used to configure the client.
+             </returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientBuilderExtensions.ConfigureConnectionInterceptor(StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder,System.Func{System.IServiceProvider,StrawberryShake.Transport.WebSockets.ISocketConnectionInterceptor})">
+            <summary>
+            Configures a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketConnectionInterceptor"/> on this socket client
+            </summary>
+            <param name="builder">
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </param>
+            <param name="factory">
+            A delegate that creates a <see cref="T:StrawberryShake.Transport.WebSockets.ISocketConnectionInterceptor"/>
+            </param>
+            <returns>
+            An <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/> that can be used to configure the client.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.WebSocketClientFactoryServiceCollectionExtensions">
+            <summary>
+            Extensions methods to configure an <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> for
+            <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClientFactory"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientFactoryServiceCollectionExtensions.AddProtocol``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds a websocket <see cref="T:StrawberryShake.Transport.WebSockets.ISocketProtocolFactory"/> to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </summary>
+            <param name="services">
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </param>
+            <returns>
+            An <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/> that can be used to configure the client.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientFactoryServiceCollectionExtensions.AddWebSocketClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            Adds the <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClientFactory"/> and related services
+            to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> and configures a named
+            <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </summary>
+            <param name="services">
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </param>
+            <param name="name">
+            The logical name of the <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/> to configure.
+            </param>
+            <returns>
+            An <see cref="T:StrawberryShake.Transport.WebSockets.IWebSocketClientBuilder"/> that can be used to configure the client.
+            </returns>
+            <remarks>
+            <para>
+            <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/> instances that apply the provided configuration can
+            be retrieved using <see cref="M:StrawberryShake.Transport.WebSockets.ISocketClientFactory.CreateClient(System.String)"/>
+            and providing the matching name.
+            </para>
+            <para>
+            Use <see cref="!:Options.DefaultName"/> as the name to configure the
+            default client.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientFactoryServiceCollectionExtensions.AddWebSocketClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{StrawberryShake.Transport.WebSockets.IWebSocketClient})">
+            <summary>
+            Adds the <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClientFactory"/> and related services
+            to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> and configures a named
+            <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </summary>
+            <param name="services">
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </param>
+            <param name="name">
+            The logical name of the <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/> to configure.
+            </param>
+            <param name="configureClient">
+            A delegate that is used to configure an <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </param>
+            <returns>
+            An <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClientFactory"/> that can be used to configure the client.
+            </returns>
+            <remarks>
+            <para>
+            <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/> instances that apply the provided
+            configuration can be retrieved using
+            <see cref="M:StrawberryShake.Transport.WebSockets.ISocketClientFactory.CreateClient(System.String)"/> and providing
+            the matching name.
+            </para>
+            <para>
+            Use <see cref="!:Options.DefaultName"/> as the name to configure
+            the default client.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientFactoryServiceCollectionExtensions.AddWebSocketClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.IServiceProvider,StrawberryShake.Transport.WebSockets.IWebSocketClient})">
+            <summary>
+            Adds the <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClientFactory"/> and related services
+            to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> and configures a named
+            <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </summary>
+            <param name="services">
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </param>
+            <param name="name">
+            The logical name of the <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/> to configure.
+            </param>
+            <param name="configureClient">
+            A delegate that is used to configure an <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/>.
+            </param>
+            <returns>
+            An <see cref="T:StrawberryShake.Transport.WebSockets.ISocketClientFactory"/> that can be used to configure the client.
+            </returns>
+            <remarks>
+            <para>
+            <see cref="T:StrawberryShake.Transport.WebSockets.WebSocketClient"/> instances that apply the provided
+            configuration can be retrieved using
+            <see cref="M:StrawberryShake.Transport.WebSockets.ISocketClientFactory.CreateClient(System.String)"/> and providing
+            the matching name.
+            </para>
+            <para>
+            Use <see cref="!:Options.DefaultName"/> as the name to configure
+            the default client.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.WebSocketClientPoolServiceCollectionExtensions">
+            <summary>
+            Extensions methods to configure an <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> for
+            <see cref="T:StrawberryShake.Transport.WebSockets.ISessionPool"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.WebSocketClientPoolServiceCollectionExtensions.AddWebSocketClientPool(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Registers the <see cref="T:StrawberryShake.Transport.WebSockets.ISessionPool"/> on the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </summary>
+            <param name="services">
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </param>
+            <returns>
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            Throws when <paramref name="services"/> is <c>null</c>
+            </exception>
+        </member>
+    </members>
+</doc>

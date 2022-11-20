@@ -1,0 +1,31 @@
+<linker>
+    <!-- Keep all our assemblies. -->
+    <assembly fullname="Microsoft.AspNetCore.WebUtilities" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Bcl.AsyncInterfaces" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Extensions.Configuration" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Extensions.Configuration.Abstractions" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Extensions.Configuration.Binder" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Extensions.DependencyInjection" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Extensions.DependencyInjection.Abstractions" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Extensions.Http" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Extensions.Logging" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Extensions.Logging.Abstractions" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Extensions.Options" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Extensions.Primitives" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="Microsoft.Net.Http.Headers" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="StrawberryShake.Core" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="StrawberryShake.Resources" preserve="all" ignoreIfMissing="1"/>
+    <!-- strawberryshake.server should not be needed because its just tooling and not going into the build -->
+    <assembly fullname="StrawberryShake.Transport.Http" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="StrawberryShake.Transport.WebSockets" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="System.Buffers" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="System.Collections.Immutable" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="System.IO.Pipelines" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="System.Net.Http.Json" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="System.Numerics.Vectors" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="System.Runtime.CompilerServices.Unsafe" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="System.Text.Encodings.Web" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="System.Text.Json" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="System.Threading.Channels" preserve="all" ignoreIfMissing="1"/>
+    <assembly fullname="System.Threading.Tasks.Extensions" preserve="all" ignoreIfMissing="1"/>
+</linker>
